@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Birthday Surprise 🎂</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffd86f);
+}
+
+.container{
+width:90%;
+max-width:600px;
+background:white;
+padding:30px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+animation:pop .8s;
+z-index:5;
+}
+
+@keyframes pop{
+from{transform:scale(.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+h1{
+color:#ff2d55;
+margin-bottom:20px;
+}
+
+#question{
+font-size:25px;
+margin-bottom:20px;
+color:#333;
+}
+
+button{
+display:block;
+width:90%;
+margin:12px auto;
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:12px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+background:#e6395f;
+}
+
+.balloon{
+position:absolute;
+bottom:-150px;
+font-size:45px;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(-120vh);
+}
+}
+
+#result{
+display:none;
+font-size:22px;
+line-height:1.8;
+color:#d63384;
+}
+
+#gift{
+font-size:80px;
+cursor:pointer;
+display:none;
+animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+50%{
+transform:translateY(-10px);
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="balloon" style="left:5%;animation-delay:0s;">🎈</div>
+<div class="balloon" style="left:20%;animation-delay:2s;">🎈</div>
+<div class="balloon" style="left:40%;animation-delay:4s;">🎈</div>
+<div class="balloon" style="left:60%;animation-delay:1s;">🎈</div>
+<div class="balloon" style="left:80%;animation-delay:3s;">🎈</div>
+<div class="balloon" style="left:95%;animation-delay:5s;">🎈</div>
+
+<div class="container">
+
+<h1>🎂 Birthday Surprise 🎂</h1>
+
+<div id="quiz">
+
+<h2 id="question">
+Ready for a fun challenge? 😁
+</h2>
+
+<div id="answers">
+<button onclick="startQuiz()">Start 🎁</button>
+</div>
+
+</div>
+
+<div id="gift">🎁</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions=[
+{
+q:"Who is your favourite brother or trusted brother??",
+a:["Me 😎","Yashwanth","Others"],
+c:0
+},
+{
+q:"How much you Love your brother 😁???",
+a:["50%","75%","100% ❤️"],
+c:2
+},
+{
+q:"Is your brother handsome??? 😂",
+a:["Yes 😎","Absolutely 🔥","Yeah ❤️"],
+c:0
+},
+{
+q:"You want to seeee it?",
+a:["Yes 😍","No 😒"],
+c:0
+},
+{
+q:"Are you readyyy??",
+a:["Yes 🎉","No"],
+c:0
+},
+{
+q:"Still waitingggg",
+a:["Wait 😁"],
+c:0
+},
+{
+q:"Let's goooio",
+a:["Click it 🎁"],
+c:0
+}
+];
+
+let current=0;
+
+function startQuiz(){
+showQuestion();
+}
+
+function showQuestion(){
+
+let q=questions[current];
+
+document.getElementById("question").innerHTML=q.q;
+
+let html="";
+
+q.a.forEach((item,index)=>{
+html+=`<button onclick="checkAnswer(${index})">${item}</button>`;
+});
+
+document.getElementById("answers").innerHTML=html;
+
+}function checkAnswer(choice){
+
+let q=questions[current];
+
+if(choice===q.c){
+
+current++;
+
+if(current<questions.length){
+
+showQuestion();
+
+}else{
+
+document.getElementById("quiz").style.display="none";
+
+document.getElementById("gift").style.display="block";
+
+document.getElementById("gift").innerHTML="🎁";
+
+document.getElementById("gift").onclick=openGift;
+
+}
+
+}else{
+
+alert("❌ Oops! Wrong answer.\nTry again 😁");
+
+}
+
+}
+
+function openGift(){
+
+document.getElementById("gift").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.body.insertAdjacentHTML("beforeend",`
+
+<div id="confetti">
+
+<span>🎉</span><span>🎊</span><span>✨</span><span>🎉</span>
+<span>🎊</span><span>🎈</span><span>🎉</span><span>✨</span>
+<span>🎊</span><span>🎉</span>
+
+</div>
+
+`);
+
+document.getElementById("result").innerHTML=`
+<h1>🎉 HAPPY BIRTHDAY 🎂</h1>
+
+<h2>❤️ To My Sister ❤️</h2>
+
+<p style="margin-top:20px;font-size:22px;line-height:1.8">
+
+Happy birthday to myyyyy sisterrrrr ❤️<br><br>
+
+To my trusted one,<br>
+My best friend,<br>
+My everything. 🥹❤️<br><br>
+
+Love you so muchhhhh ❤️<br>
+
+Enjoy your day.<br>
+
+Be safe.<br>
+
+Miss you sooo much 🥹<br><br>
+
+Thank you for coming into my life. ❤️<br><br>
+
+Let's meet one day before 2027 😁🎉
+
+</p>
+
+<h2 style="margin-top:25px;">
+🎂 Have an Amazing Birthday!! 🎂
+</h2>
+
+`;
+
+playSong();
+
+}
+
+function playSong(){
+
+let audio=new Audio("song.mp3");
+
+audio.volume=0.3;
+
+audio.play();
+
+}const style=document.createElement("style");
+
+style.innerHTML=`
+
+#confetti{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+
+}
+
+#confetti span{
+
+position:absolute;
+font-size:35px;
+animation:fall 4s linear infinite;
+
+}
+
+#confetti span:nth-child(1){left:5%;animation-delay:0s;}
+#confetti span:nth-child(2){left:15%;animation-delay:.5s;}
+#confetti span:nth-child(3){left:25%;animation-delay:1s;}
+#confetti span:nth-child(4){left:35%;animation-delay:1.5s;}
+#confetti span:nth-child(5){left:45%;animation-delay:2s;}
+#confetti span:nth-child(6){left:55%;animation-delay:2.5s;}
+#confetti span:nth-child(7){left:65%;animation-delay:3s;}
+#confetti span:nth-child(8){left:75%;animation-delay:3.5s;}
+#confetti span:nth-child(9){left:85%;animation-delay:1.2s;}
+#confetti span:nth-child(10){left:95%;animation-delay:2.2s;}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-120px) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0.9;
+}
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+</script>
+
+</body>
+</html>
